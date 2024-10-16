@@ -1,6 +1,7 @@
 from typing import Dict, Optional
 import typing
 import pandas as pd
+import typing
 # import pyspark
 
 
@@ -8,19 +9,12 @@ class Feature:
   
     def __init__(
         self,
-        name: str,
-        dtype: typing.Any,
+        name: Optional[str],
+        dtype: typing.Optional[any],
         description: str = "",
         labels: Optional[Dict[str, str]] = None,
     ):
-        self._name = name
-        
-        self._dtype = dtype
-        self._description = description
-        if labels is None:
-            self._labels = dict()
-        else:
-            self._labels = labels
+        pass
 
     def __eq__(self, other):
         if self.name != other.name or self.dtype != other.dtype:
@@ -53,8 +47,9 @@ class Feature:
         return self._labels
     
     def detect_new_feature(self, df: pd.DataFrame, orig:list):
-         curr = df.columns.to_list
+         curr = df.columns.to_list()
          fnew =[i for i in curr if i not in orig]
+         print(fnew)
          return fnew
     
     
